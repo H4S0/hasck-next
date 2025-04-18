@@ -9,6 +9,8 @@ yarn.lock
 .output
 .vinxi
 
+generated
+
 /build/
 /api/
 /server/build
