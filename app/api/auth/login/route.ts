@@ -5,10 +5,12 @@ import z from "zod";
 import {err, ResultAsync} from "neverthrow";
 import {User} from "@/app/models/User";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken'
+
 
 const loginSchema = z.object({
-    username: z.string().min(2, 'Username must be at least 2 characters'),
-    password: z.string().min(8, 'Password must be at least 8 characters'),
+    username: z.string(),
+    password: z.string(),
 });
 
 export async function POST(req: NextRequest) {
@@ -40,4 +42,20 @@ export async function POST(req: NextRequest) {
     if(!matchingPassword.value){
         return NextResponse.json({error: 'Invalid credentials'}, {status: 401})
     }
+
+    const jwtSecret = process.env.JWT_SECRET
+    //staviti u posebnu funckiju service folder
+    //napraviti getEnv funkciju
+    const JWT = jwt.sign(
+        {
+            id: user.value._id,
+            username: user.value.username,
+            email: user.value.email,
+            role: user.value.role,
+        },
+        jwtSecret as string,
+        { expiresIn: '1d' }
+    );
+
+    return NextResponse.json({token: JWT})
 }
