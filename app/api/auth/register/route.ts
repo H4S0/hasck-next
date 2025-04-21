@@ -18,7 +18,6 @@ const registerSchema = z.object({
 
 export async function POST(req: NextRequest) {
     await connectMongo();
-
     const result = await validateRequest(req, registerSchema);
 
     if (!result.success) {
