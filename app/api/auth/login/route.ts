@@ -1,12 +1,12 @@
 import {NextRequest, NextResponse} from "next/server";
 import mongoConnect from "@/app/lib/mongoConnect";
-
 import z from "zod";
 import {err, ResultAsync} from "neverthrow";
 import {User} from "@/app/models/User";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
 import {validateRequest} from "@/app/lib/validate";
+import {isAuthenticated} from "@/app/middleware/isAuthenticated";
 
 
 
@@ -58,6 +58,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         jwtSecret as string,
         { expiresIn: '1d' }
     );
+
+    await isAuthenticated(req)
 
     const response = NextResponse.json({ message: 'User logged in successfully!' });
 
