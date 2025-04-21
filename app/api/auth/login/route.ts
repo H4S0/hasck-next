@@ -58,8 +58,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         { expiresIn: '1d' }
     );
 
-
-    const response = NextResponse.json({ message: 'Authenticated!' });
+    const response = NextResponse.json({ message: 'User logged in successfully!' });
 
     response.cookies.set({
         name: 'Bearer',
