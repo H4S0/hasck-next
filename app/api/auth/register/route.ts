@@ -4,6 +4,7 @@ import z from 'zod';
 import connectMongo from "@/app/lib/mongoConnect";
 import { User } from "@/app/models/User";
 import bcrypt from 'bcrypt';
+import {ResultAsync, err} from 'neverthrow'
 
 const UserRole = ['admin', 'user'] as const;
 
@@ -26,34 +27,38 @@ export async function POST(req: NextRequest) {
 
     const { email, username, password, role, emailVerified } = result.data;
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await ResultAsync.fromPromise(User.findOne({ email }), (e) => err(e as Error));
 
-    if (existingUser) {
-        return NextResponse.json({ error: 'User with that email already exists' }, { status: 400 });
+    if (existingUser.isErr()) {
+        return NextResponse.json({ error: existingUser.error }, { status: 500 });
+    }
+
+    if(existingUser.value) {
+        return NextResponse.json({ error: 'User already exists' }, { status: 400 })
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const user = await User.insertOne({
+    const user = await ResultAsync.fromPromise(User.insertOne({
         username,
         email,
         password: hashedPassword,
         emailVerified,
         role,
-    });
+    }), (e) => err(e as Error));
 
-    if (!user) {
-        return NextResponse.json({ error: 'Error while creating user, please contact support!' }, { status: 500 });
+    if (user.isErr()) {
+        return NextResponse.json({ error: user.error }, { status: 500 });
     }
 
     return NextResponse.json({
         message: 'User created successfully',
         data: {
-            id: user._id,
-            email: user.email,
-            username: user.username,
-            role: user.role,
-            emailVerified: user.emailVerified,
+            id: user.value._id,
+            email: user.value.email,
+            username: user.value.username,
+            role: user.value.role,
+            emailVerified: user.value.emailVerified,
         },
     }, { status: 201 });
 }
