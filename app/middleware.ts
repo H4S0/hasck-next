@@ -1,4 +1,3 @@
-// lib/validate.ts
 import { ZodSchema, ZodError } from 'zod';
 import { NextRequest } from 'next/server';
 

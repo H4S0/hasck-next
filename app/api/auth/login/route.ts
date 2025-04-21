@@ -6,6 +6,7 @@ import {err, ResultAsync} from "neverthrow";
 import {User} from "@/app/models/User";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
+import { cookies } from "next/headers";
 
 
 const loginSchema = z.object({
@@ -13,7 +14,7 @@ const loginSchema = z.object({
     password: z.string(),
 });
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest, res: NextResponse) {
     await mongoConnect()
     const result = await validateRequest(req,loginSchema)
 
@@ -57,5 +58,18 @@ export async function POST(req: NextRequest) {
         { expiresIn: '1d' }
     );
 
-    return NextResponse.json({token: JWT})
+
+    const response = NextResponse.json({ message: 'Authenticated!' });
+
+    response.cookies.set({
+        name: 'Bearer',
+        value: JWT,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 60 * 60 * 24,
+        path: '/',
+    });
+
+    return response;
 }
