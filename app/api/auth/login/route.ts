@@ -1,12 +1,13 @@
 import {NextRequest, NextResponse} from "next/server";
 import mongoConnect from "@/app/lib/mongoConnect";
-import {validateRequest} from "@/app/middleware";
+
 import z from "zod";
 import {err, ResultAsync} from "neverthrow";
 import {User} from "@/app/models/User";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
-import { cookies } from "next/headers";
+import {validateRequest} from "@/app/lib/validate";
+
 
 
 const loginSchema = z.object({

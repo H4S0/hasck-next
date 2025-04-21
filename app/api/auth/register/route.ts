@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { validateRequest } from "@/app/middleware";
 import z from 'zod';
 import connectMongo from "@/app/lib/mongoConnect";
 import { User } from "@/app/models/User";
 import bcrypt from 'bcrypt';
 import {ResultAsync, err} from 'neverthrow'
+import {validateRequest} from "@/app/lib/validate";
 
 const UserRole = ['admin', 'user'] as const;
 
