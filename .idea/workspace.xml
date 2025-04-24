@@ -7,6 +7,8 @@
     <list default="true" id="2d344db3-f401-45c0-b745-b0890cb9fc6d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api/auth/login/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/login/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/auth/register/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/register/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/middleware/isAuthenticated.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/isAuthenticated.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +77,9 @@
       <option name="presentableId" value="Default" />
       <updated>1745166645569</updated>
       <workItem from="1745166648059" duration="5612000" />
-      <workItem from="1745227766752" duration="11170000" />
+      <workItem from="1745227766752" duration="11426000" />
+      <workItem from="1745309512105" duration="58000" />
+      <workItem from="1745428100755" duration="3544000" />
     </task>
     <servers />
   </component>
