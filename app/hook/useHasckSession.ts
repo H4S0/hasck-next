@@ -1,6 +1,5 @@
 import {cookies} from "next/headers";
 import jwt from "jsonwebtoken";
-import {NextResponse} from "next/server";
 import {User} from "@/app/models/User";
 
 interface SessionResult {
