@@ -4,11 +4,10 @@ import {NextResponse} from "next/server";
 import {User} from "@/app/models/User";
 
 interface SessionResult {
-    user: any | null;
+    user:  | null;
     authenticated: boolean;
     error?: string;
 }
-
 export const useHasckServerSession = async (): Promise<SessionResult> => {
     try {
         const token = (await cookies()).get("token")?.value;
