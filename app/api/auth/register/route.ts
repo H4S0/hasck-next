@@ -5,8 +5,9 @@ import { User } from '@/app/models/User';
 import bcrypt from 'bcrypt';
 import { ResultAsync, err } from 'neverthrow';
 import { validateRequest } from '@/app/lib/validate';
+import {useHasckClientSession} from "@/app/hook/useHasckClientSession";
 
-const UserRole = ['admin', 'user'] as const;
+export const UserRole = ['admin', 'user'] as const;
 
 const registerSchema = z.object({
   email: z.string().email(),
