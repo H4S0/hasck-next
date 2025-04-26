@@ -1,11 +1,19 @@
-import { useHasckServerSession } from '@/app/hook/getHasckServerSession';
+import { getHasckServerSession } from '@/app/services/getHasckServerSession';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const { user, isAuthenticated } = await useHasckServerSession();
+  const { user, isAuthenticated } = await getHasckServerSession();
 
-  if (!isAuthenticated) {
-    return { user: null, isAuthenticated: false, error: 'User not found' };
+  if (!isAuthenticated || !user) {
+    return NextResponse.json({
+      user: null,
+      isAuthenticated: false,
+      error: 'User not found',
+    });
   }
 
-  return { user, isAuthenticated: true };
+  return NextResponse.json({
+    user,
+    isAuthenticated: true,
+  });
 }

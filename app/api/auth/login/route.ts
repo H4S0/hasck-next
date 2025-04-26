@@ -12,7 +12,7 @@ const loginSchema = z.object({
   password: z.string(),
 });
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   await mongoConnect();
   const result = await validateRequest(req, loginSchema);
 

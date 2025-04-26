@@ -4,7 +4,7 @@ import { User } from '@/app/models/User';
 import { tokenParsing } from '@/app/services/token-parse';
 import { UserRole } from '../api/auth/register/route';
 
-const userSchema = z.object({
+export const userSchema = z.object({
   username: z.string().min(2),
   password: z.string().min(8),
   email: z.string().email(),
@@ -34,7 +34,7 @@ export const getHasckServerSession = async (): Promise<SessionResult> => {
     if (!user) {
       return { user: null, isAuthenticated: false, error: 'User not found' };
     }
-
+    console.log('user iz server hoka', user);
     return { user, isAuthenticated: true };
   } catch (err) {
     console.error('Auth error:', err);

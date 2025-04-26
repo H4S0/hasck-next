@@ -1,13 +1,29 @@
 'use client';
 
-import {
-  SessionResult,
-  userSchemaType,
-} from '@/app/hook/getHasckServerSession';
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 export const useHasckClientSession = () => {
-  const [user, setUser] = useState<userSchemaType[]>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['user'],
+    queryFn: async () => {
+      const res = await fetch('/api/auth/authenticated', {
+        credentials: 'include',
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch user');
+      }
+
+      const data = await res.json();
+      return data.user;
+    },
+    retry: false,
+  });
+
+  return {
+    user: data ?? null,
+    isAuthenticated: !!data,
+    errorMessage: error ? (error as Error).message : '',
+    loading: isLoading,
+  };
 };

@@ -1,7 +1,13 @@
+'use client';
+
+import { useHasckClientSession } from './hook/useHasckClientSession';
+
 export default function Home() {
-  return (
-   <div>
-     bla
-   </div>
-  );
+  const { user } = useHasckClientSession();
+
+  if (!user) {
+    return;
+  }
+
+  return <div>{user.username}</div>;
 }
