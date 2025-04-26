@@ -1,8 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
 import { redirect } from 'next/navigation';
-import {tokenParsing} from "@/app/services/token-parse";
+import { tokenParsing } from '@/app/services/token-parse';
 
 const protectedRoute = ['/dashboard'];
 

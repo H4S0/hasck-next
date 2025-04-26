@@ -6,8 +6,6 @@ import { User } from '@/app/models/User';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { validateRequest } from '@/app/lib/validate';
-import { isAuthenticated } from '@/app/middleware/isAuthenticated';
-import {useHasckClientSession} from "@/app/hook/useHasckClientSession";
 
 const loginSchema = z.object({
   username: z.string(),
@@ -83,6 +81,5 @@ export async function POST(req: NextRequest, res: NextResponse) {
     path: '/',
   });
 
-  await isAuthenticated(req);
   return response;
 }
