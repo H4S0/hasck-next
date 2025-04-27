@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import z from 'zod';
-import connectMongo from '@/app/lib/mongoConnect';
+import connectMongo from '@/app/utils/mongoConnect';
 import { User } from '@/app/models/User';
 import bcrypt from 'bcrypt';
 import { ResultAsync, err } from 'neverthrow';
-import { validateRequest } from '@/app/lib/validate';
+import { validateRequest } from '@/app/utils/validate';
 import { getHasckServerSession } from '@/app/services/getHasckServerSession';
 
 export const UserRole = ['admin', 'user'] as const;

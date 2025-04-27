@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import mongoConnect from '@/app/lib/mongoConnect';
+import mongoConnect from '@/app/utils/mongoConnect';
 import z from 'zod';
 import { err, ResultAsync } from 'neverthrow';
 import { User } from '@/app/models/User';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { validateRequest } from '@/app/lib/validate';
+import { validateRequest } from '@/app/utils/validate';
 
 const loginSchema = z.object({
   username: z.string(),
