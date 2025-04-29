@@ -1,5 +1,6 @@
 'use client'
 
+import { ModeToggle } from "@/components/theme-provider/theme-toggle";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import { useState } from "react";
@@ -121,6 +122,7 @@ export default function Page() {
               Hasck
             </Link>
             <div className="flex items-center gap-2 md:gap-4">
+              <ModeToggle/>
               <Button asChild variant="ghost" size="sm" className="text-sm md:text-base">
                 <Link href="/login">Sign In</Link>
               </Button>
