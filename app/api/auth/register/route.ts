@@ -5,13 +5,12 @@ import { User } from '@/app/models/User';
 import bcrypt from 'bcrypt';
 import { ResultAsync, err } from 'neverthrow';
 import { validateRequest } from '@/app/utils/validate';
-import { getHasckServerSession } from '@/app/services/getHasckServerSession';
 
 export const UserRole = ['admin', 'user'] as const;
 
 const registerSchema = z.object({
   email: z.string().email(),
-  username: z.string().min(2, 'Username must be at least 2 characters'),
+  username: z.string().min(4, 'Username must be at least 2 characters'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
   confirmPassword: z.string(),
   role: z.enum(UserRole).default('user'),
