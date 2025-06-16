@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
 
   const user = await ResultAsync.fromPromise(
     User.insertOne({
+      _id: crypto.randomUUID().toString(),
       username,
       email,
       password: hashedPassword,
@@ -61,7 +62,6 @@ export async function POST(req: NextRequest) {
     {
       message: 'User created successfully',
       data: {
-        id: user.value._id,
         email: user.value.email,
         username: user.value.username,
         role: user.value.role,

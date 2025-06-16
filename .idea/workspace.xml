@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2d344db3-f401-45c0-b745-b0890cb9fc6d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/auth/register/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/register/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/forms/register-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/forms/register-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +91,9 @@
       <workItem from="1745690477301" duration="4898000" />
       <workItem from="1745785320108" duration="95000" />
       <workItem from="1745953179360" duration="2000" />
+      <workItem from="1746525151247" duration="1188000" />
+      <workItem from="1746527058706" duration="252000" />
+      <workItem from="1746527623322" duration="6000" />
     </task>
     <servers />
   </component>
