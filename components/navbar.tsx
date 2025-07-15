@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Button } from './ui/button';
-import { ModeToggle } from './theme-provider/theme-toggle';
 
 export const Navbar = () => {
   return (
@@ -10,7 +9,6 @@ export const Navbar = () => {
           Hasck
         </Link>
         <div className="flex items-center gap-2 md:gap-4">
-          <ModeToggle />
           <Button
             asChild
             variant="ghost"
