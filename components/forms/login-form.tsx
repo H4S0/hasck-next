@@ -6,7 +6,14 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '../ui/button';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+  CardDescription,
+} from '../ui/card';
 import {
   Form,
   FormField,
@@ -17,6 +24,9 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Separator } from '../ui/separator';
 
 export const LoginSchema = z.object({
   username: z.string(),
@@ -24,6 +34,7 @@ export const LoginSchema = z.object({
 });
 
 const LoginForm = () => {
+  const router = useRouter();
   const { mutate, isPending } = useLogin();
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -33,7 +44,7 @@ const LoginForm = () => {
     mutate(data, {
       onSuccess: (response) => {
         toast.success(response.message);
-        //redirect na dashboard
+        router.push('/dashboard');
       },
       onError: (error) => {
         toast.error(error.message);
@@ -83,6 +94,17 @@ const LoginForm = () => {
           </form>
         </Form>
       </CardContent>
+
+      <Separator />
+
+      <CardFooter className="flex flex-col items-center gap-5">
+        <CardDescription>Dont have account?</CardDescription>
+        <Link href={'/signup'} className="w-full">
+          <Button className="w-full" variant="secondary">
+            Make one
+          </Button>
+        </Link>
+      </CardFooter>
     </Card>
   );
 };

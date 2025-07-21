@@ -17,7 +17,16 @@ import { z } from 'zod';
 import { useRegister } from '@/app/hook/useRegister';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../ui/card';
+import { Separator } from '../ui/separator';
+import Link from 'next/link';
 
 export const RegisterSchema = z
   .object({
@@ -123,6 +132,16 @@ const RegisterForm = () => {
           </form>
         </Form>
       </CardContent>
+      <Separator />
+
+      <CardFooter className="flex flex-col items-center gap-5">
+        <CardDescription>Already have account?</CardDescription>
+        <Link href={'/signup'} className="w-full">
+          <Button className="w-full" variant="secondary">
+            Login
+          </Button>
+        </Link>
+      </CardFooter>
     </Card>
   );
 };
