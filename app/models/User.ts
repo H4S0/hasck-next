@@ -21,15 +21,18 @@ const UserSchema = new mongoose.Schema(
       enum: ['admin', 'user'],
       default: 'user',
     },
-    emailVerified: {
-      type: Boolean,
-      default: false,
+    passwordResetToken: {
+      type: String,
+      required: false,
+    },
+    passwordResetExpires: {
+      type: String,
+      required: false,
     },
   },
   {
-    timestamps: true, // adds createdAt and updatedAt fields
+    timestamps: true,
   }
 );
 
-// Export or register the model
 export const User = mongoose.models.User || mongoose.model('User', UserSchema);

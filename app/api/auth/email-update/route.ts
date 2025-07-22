@@ -19,7 +19,6 @@ const emailSchema = z.object({
 
 export async function PUT(req: NextRequest) {
   await connectMongo();
-  console.log(req);
   const result = await validateRequest(req, emailSchema);
 
   if (!result.success) {

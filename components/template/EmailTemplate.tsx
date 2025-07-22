@@ -10,12 +10,14 @@ interface EmailTemplateProps {
   firstName: string;
   updatedEmail?: string;
   variant: TemplateVariant;
+  hashedToken?: string;
 }
 
 export function EmailTemplate({
   firstName,
   variant,
   updatedEmail,
+  hashedToken,
 }: EmailTemplateProps) {
   const renderContent = () => {
     switch (variant) {
@@ -39,7 +41,12 @@ export function EmailTemplate({
         return (
           <>
             <h1>Hey {firstName},</h1>
-            <p>🔑 Your password was successfully reset.</p>
+            <p>
+              🔑 Your request password reset click button bellow to continue
+            </p>
+            <a href={`http://localhost:3000/password-reset/${hashedToken}`}>
+              Confirm Now
+            </a>
           </>
         );
 
