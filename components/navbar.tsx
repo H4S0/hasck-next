@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Button } from './ui/button';
 import LogoutButton from '@/app/logout';
+import { Separator } from './ui/separator';
 
 export const Navbar = ({ isAuthenticated }: { isAuthenticated?: boolean }) => {
   return (
@@ -33,6 +34,7 @@ export const Navbar = ({ isAuthenticated }: { isAuthenticated?: boolean }) => {
           )}
         </div>
       </div>
+      <Separator className="w-full my-4" />
     </nav>
   );
 };

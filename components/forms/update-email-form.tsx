@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import z from 'zod';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import {
@@ -15,6 +15,8 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import { toast } from 'sonner';
+import { useEmailUpdate } from '@/app/hook/useUpdateEmail';
 
 export const EmailUpdateSchema = z.object({
   oldEmail: z.string().email(),
@@ -22,10 +24,21 @@ export const EmailUpdateSchema = z.object({
 });
 
 const UpdateEmailForm = () => {
+  const { mutate } = useEmailUpdate();
   const form = useForm<z.infer<typeof EmailUpdateSchema>>({
     resolver: zodResolver(EmailUpdateSchema),
   });
 
+  const onSubmit: SubmitHandler<z.infer<typeof EmailUpdateSchema>> = (data) => {
+    mutate(data, {
+      onSuccess: (response) => {
+        toast.success(response.message);
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
   return (
     <Card>
       <CardHeader>
@@ -33,7 +46,7 @@ const UpdateEmailForm = () => {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               name="oldEmail"
               control={form.control}
