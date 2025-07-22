@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import z from 'zod';
 import connectMongo from '@/app/utils/mongoConnect';
 import { User } from '@/app/models/User';
-import bcrypt from 'bcrypt';
+import { hash } from 'bcrypt-ts';
 import { ResultAsync, err } from 'neverthrow';
 import { validateRequest } from '@/app/utils/validate';
 
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'User already exists' }, { status: 400 });
   }
 
-  const hashedPassword = await bcrypt.hash(password, 12);
+  const hashedPassword = await hash(password, 12);
 
   const user = await ResultAsync.fromPromise(
     User.insertOne({

@@ -3,7 +3,7 @@ import mongoConnect from '@/app/utils/mongoConnect';
 import z from 'zod';
 import { err, ResultAsync } from 'neverthrow';
 import { User } from '@/app/models/User';
-import bcrypt from 'bcrypt';
+import { compare } from 'bcrypt-ts';
 import jwt from 'jsonwebtoken';
 import { validateRequest } from '@/app/utils/validate';
 
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
   }
 
   const matchingPassword = await ResultAsync.fromPromise(
-    bcrypt.compare(password, user.value.password),
+    compare(password, user.value.password),
     (e) => err(e as Error)
   );
 

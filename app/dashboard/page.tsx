@@ -1,31 +1,14 @@
-'use client';
-
-import React, { useEffect } from 'react';
-import { useHasckClientSession } from '../hook/useHasckClientSession';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import { getHasckServerSession } from '../services/getHasckServerSession';
 
-const DashboardIndex = () => {
-  const { isAuthenticated, logout, loading } = useHasckClientSession();
-  const router = useRouter();
+const DashboardIndex = async () => {
+  const { isAuthenticated } = await getHasckServerSession();
 
-  useEffect(() => {
-    if (!loading && !isAuthenticated) {
-      router.push('/login');
-    }
-  }, [loading, isAuthenticated, router]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!isAuthenticated) {
-    return null;
-  }
+  console.log(isAuthenticated);
 
   return (
     <div>
-      <Button onClick={logout}>Logout</Button>
+      <Button>Logout</Button>
     </div>
   );
 };
