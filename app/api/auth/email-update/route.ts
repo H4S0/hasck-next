@@ -1,22 +1,30 @@
 import { User } from '@/app/models/User';
 import connectMongo from '@/app/utils/mongoConnect';
 import { validateRequest } from '@/app/utils/validate';
-import { EmailUpdateSchema } from '@/components/forms/update-email-form';
-import { EmailTemplate } from '@/components/template/EmailTemplate';
+import {
+  EmailTemplate,
+  TemplateVariant,
+} from '@/components/template/EmailTemplate';
 import { err, ResultAsync } from 'neverthrow';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import z from 'zod';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(req: NextRequest) {
+const emailSchema = z.object({
+  oldEmail: z.string().email(),
+  newEmail: z.string().email(),
+});
+
+export async function PUT(req: NextRequest) {
   await connectMongo();
-  const result = await validateRequest(req, EmailUpdateSchema);
+  console.log(req);
+  const result = await validateRequest(req, emailSchema);
 
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 400 });
   }
-
   const { oldEmail, newEmail } = result.data;
 
   const existingUser = await ResultAsync.fromPromise(
@@ -58,11 +66,30 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  //napraviti full reusable template
+  const updated = await ResultAsync.fromPromise(
+    User.findOneAndUpdate({ email: oldEmail }, { email: newEmail }),
+    (e) => err(e as Error)
+  );
+
+  if (updated.isErr()) {
+    return NextResponse.json({ error: updated.error }, { status: 500 });
+  }
+
   await resend.emails.send({
     from: 'Acme <hasck-next@resend.dev>',
-    to: [`${newEmail}`],
-    subject: 'You successfully registerd',
-    react: EmailTemplate({ firstName: `${existingUser.value.username}` }),
+    to: [`${updated.value.email}`],
+    subject: 'Your email was updated successfully',
+    react: EmailTemplate({
+      firstName: updated.value.username,
+      variant: TemplateVariant.emailUpdate,
+      updatedEmail: newEmail,
+    }),
   });
+
+  return NextResponse.json(
+    {
+      message: 'Email updated successfully',
+    },
+    { status: 201 }
+  );
 }

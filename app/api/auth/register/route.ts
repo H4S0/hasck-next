@@ -6,7 +6,10 @@ import { hash } from 'bcrypt-ts';
 import { ResultAsync, err } from 'neverthrow';
 import { validateRequest } from '@/app/utils/validate';
 import { Resend } from 'resend';
-import { EmailTemplate } from '@/components/template/EmailTemplate';
+import {
+  EmailTemplate,
+  TemplateVariant,
+} from '@/components/template/EmailTemplate';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -66,7 +69,10 @@ export async function POST(req: NextRequest) {
     from: 'Acme <hasck-next@resend.dev>',
     to: [`${user.value.email}`],
     subject: 'You successfully registerd',
-    react: EmailTemplate({ firstName: `${user.value.username}` }),
+    react: EmailTemplate({
+      firstName: user.value.firstName,
+      variant: TemplateVariant.registration,
+    }),
   });
 
   return NextResponse.json(

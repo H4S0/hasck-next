@@ -1,11 +1,58 @@
 import * as React from 'react';
 
-interface EmailTemplateProps {
-  firstName: string;
-  username?: string;
+export enum TemplateVariant {
+  registration = 'registration',
+  emailUpdate = 'emailUpdate',
+  passwordReset = 'passwordReset',
 }
 
-export function EmailTemplate({ firstName, username }: EmailTemplateProps) {
+interface EmailTemplateProps {
+  firstName: string;
+  updatedEmail?: string;
+  variant: TemplateVariant;
+}
+
+export function EmailTemplate({
+  firstName,
+  variant,
+  updatedEmail,
+}: EmailTemplateProps) {
+  const renderContent = () => {
+    switch (variant) {
+      case TemplateVariant.registration:
+        return (
+          <>
+            <h1>Welcome aboard, {firstName}!</h1>
+            <p>🎉 Your registration was successful.</p>
+          </>
+        );
+
+      case TemplateVariant.emailUpdate:
+        return (
+          <>
+            <h1>Hello, {firstName}!</h1>
+            <p>📫 Your email was successfully updated to `${updatedEmail}`</p>
+          </>
+        );
+
+      case TemplateVariant.passwordReset:
+        return (
+          <>
+            <h1>Hey {firstName},</h1>
+            <p>🔑 Your password was successfully reset.</p>
+          </>
+        );
+
+      default:
+        return (
+          <>
+            <h1>Hi {firstName},</h1>
+            <p>This is a generic message.</p>
+          </>
+        );
+    }
+  };
+
   return (
     <div
       style={{
@@ -14,14 +61,7 @@ export function EmailTemplate({ firstName, username }: EmailTemplateProps) {
         color: '#333',
       }}
     >
-      <h1>Welcome aboard, {firstName}!</h1>
-      <p>🎉 Your registration was successful.</p>
-
-      {username && (
-        <p>
-          You can now log in using your username: <strong>{username}</strong>
-        </p>
-      )}
+      {renderContent()}
 
       <p>We are excited to have you as part of our community.</p>
 

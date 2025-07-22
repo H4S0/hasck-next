@@ -62,7 +62,7 @@ const UpdateEmailForm = () => {
             />
 
             <FormField
-              name="oldEmail"
+              name="newEmail"
               control={form.control}
               render={({ field }) => (
                 <FormItem>
@@ -70,6 +70,7 @@ const UpdateEmailForm = () => {
                   <FormControl>
                     <Input placeholder="your@email.com" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />

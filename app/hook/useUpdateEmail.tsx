@@ -14,13 +14,9 @@ export const useEmailUpdate = () => {
     z.infer<typeof EmailUpdateSchema>
   >({
     mutationFn: async (data: z.infer<typeof EmailUpdateSchema>) => {
-      const response = await axios.put<EmailUpdateResponse>(
-        '/api/auth/update-email',
-        data,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.put('/api/auth/email-update', data, {
+        withCredentials: true,
+      });
       return response.data;
     },
   });
