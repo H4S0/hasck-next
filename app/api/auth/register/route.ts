@@ -5,6 +5,10 @@ import { User } from '@/app/models/User';
 import { hash } from 'bcrypt-ts';
 import { ResultAsync, err } from 'neverthrow';
 import { validateRequest } from '@/app/utils/validate';
+import { Resend } from 'resend';
+import { EmailTemplate } from '@/components/template/EmailTemplate';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const UserRole = ['admin', 'user'] as const;
 
@@ -57,6 +61,13 @@ export async function POST(req: NextRequest) {
   if (user.isErr()) {
     return NextResponse.json({ error: user.error }, { status: 500 });
   }
+
+  await resend.emails.send({
+    from: 'Acme <hasck-next@resend.dev>',
+    to: [`${user.value.email}`],
+    subject: 'You successfully registerd',
+    react: EmailTemplate({ firstName: `${user.value.username}` }),
+  });
 
   return NextResponse.json(
     {
