@@ -1,14 +1,17 @@
-import { Button } from '@/components/ui/button';
 import { getHasckServerSession } from '../services/getHasckServerSession';
+import LogoutButton from '../logout';
+import { redirect } from 'next/navigation';
 
 const DashboardIndex = async () => {
   const { isAuthenticated } = await getHasckServerSession();
 
-  console.log(isAuthenticated);
+  if (!isAuthenticated) {
+    return redirect('/login');
+  }
 
   return (
     <div>
-      <Button>Logout</Button>
+      <LogoutButton />
     </div>
   );
 };
