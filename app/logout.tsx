@@ -9,6 +9,7 @@ const LogoutButton = () => {
   const router = useRouter();
   return (
     <Button
+      variant="secondary"
       onClick={() => {
         logout();
         router.push('/');
