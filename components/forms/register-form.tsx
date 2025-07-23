@@ -127,7 +127,7 @@ const RegisterForm = () => {
             />
 
             <Button type="submit" disabled={isPending} className="w-full">
-              {isPending ? 'Registering...' : 'Register'}
+              {isPending ? 'Loading...' : 'Register'}
             </Button>
           </form>
         </Form>

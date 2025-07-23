@@ -89,7 +89,7 @@ const LoginForm = () => {
             />
 
             <Button type="submit" disabled={isPending} className="w-full">
-              {isPending ? 'Loading' : 'Login'}
+              {isPending ? 'Loading...' : 'Login'}
             </Button>
           </form>
         </Form>
@@ -102,6 +102,11 @@ const LoginForm = () => {
         <Link href={'/signup'} className="w-full">
           <Button className="w-full" variant="secondary">
             Make one
+          </Button>
+        </Link>
+        <Link href={'/init-forgot-password'} className="w-full">
+          <Button className="w-full" variant="outline">
+            Forgot password
           </Button>
         </Link>
       </CardFooter>
