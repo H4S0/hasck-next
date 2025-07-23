@@ -34,10 +34,8 @@ export const getHasckServerSession = async (): Promise<SessionResult> => {
     if (!user) {
       return { user: null, isAuthenticated: false, error: 'User not found' };
     }
-    console.log('user iz server hoka', user);
     return { user, isAuthenticated: true };
   } catch (err) {
-    console.error('Auth error:', err);
     return {
       user: null,
       isAuthenticated: false,
