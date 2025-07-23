@@ -52,7 +52,8 @@ export async function PUT(req: NextRequest) {
       {
         passwordResetToken: hashedToken,
         passwordResetExpire: new Date(Date.now() + 15 * 60 * 1000),
-      }
+      },
+      { new: true }
     ),
     (e) => err(e as Error)
   );
@@ -67,14 +68,14 @@ export async function PUT(req: NextRequest) {
     subject: 'Password reset request',
     react: EmailTemplate({
       firstName: updatedUser.value.username,
-      variant: TemplateVariant.emailUpdate,
-      hashedToken: hashedToken,
+      variant: TemplateVariant.passwordReset,
+      hashedToken: resetToken,
     }),
   });
 
   return NextResponse.json(
     {
-      message: 'Email updated successfully',
+      message: 'Email confirmation send successfully',
     },
     { status: 201 }
   );

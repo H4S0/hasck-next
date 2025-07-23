@@ -11,11 +11,14 @@ const resetPasswordSchema = z.object({
   password: z.string().min(6),
 });
 
-export async function PUT(req: NextRequest) {
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: { token: string } }
+) {
   await connectMongo();
 
-  const url = new URL(req.url);
-  const token = url.searchParams.get('token');
+  const token = await params.token;
+  console.log(token);
 
   if (!token) {
     return NextResponse.json({ error: 'Missing token' }, { status: 400 });

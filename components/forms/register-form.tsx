@@ -136,7 +136,7 @@ const RegisterForm = () => {
 
       <CardFooter className="flex flex-col items-center gap-5">
         <CardDescription>Already have account?</CardDescription>
-        <Link href={'/signup'} className="w-full">
+        <Link href={'/login'} className="w-full">
           <Button className="w-full" variant="secondary">
             Login
           </Button>

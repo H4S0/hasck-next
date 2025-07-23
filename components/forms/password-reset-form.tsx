@@ -22,22 +22,26 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { toast } from 'sonner';
+import { usePasswordReset } from '@/app/hook/usePasswordReset';
+import { ParamValue } from 'next/dist/server/request/params';
 
-import { usePasswordResetInit } from '@/app/hook/usePasswordResetInit';
-
-export const PasswordResetSchema = z.object({
-  email: z.string().email(),
-});
-
-const InitPasswordResetForm = () => {
-  const { mutate, isPending } = usePasswordResetInit();
-  const form = useForm<z.infer<typeof PasswordResetSchema>>({
-    resolver: zodResolver(PasswordResetSchema),
+export const passwordSchema = z
+  .object({
+    password: z.string(),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof PasswordResetSchema>> = (
-    data
-  ) => {
+const PasswordResetForm = ({ token }: { token: ParamValue }) => {
+  const { mutate, isPending } = usePasswordReset(token);
+  const form = useForm<z.infer<typeof passwordSchema>>({
+    resolver: zodResolver(passwordSchema),
+  });
+
+  const onSubmit: SubmitHandler<z.infer<typeof passwordSchema>> = (data) => {
     mutate(data, {
       onSuccess: (response) => {
         toast.success(response.message);
@@ -61,12 +65,26 @@ const InitPasswordResetForm = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
-              name="email"
+              name="password"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="your@email.com" {...field} />
+                    <Input placeholder="••••••••" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="••••••••" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -83,4 +101,4 @@ const InitPasswordResetForm = () => {
   );
 };
 
-export default InitPasswordResetForm;
+export default PasswordResetForm;
