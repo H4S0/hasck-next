@@ -24,14 +24,6 @@ export const CtaSection = () => {
           >
             <Link href="/signup">Start Building Now →</Link>
           </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-2 hover:bg-background/50 backdrop-blur-sm"
-          >
-            <Link href="/docs">Read Documentation</Link>
-          </Button>
         </div>
       </div>
     </section>
