@@ -10,8 +10,8 @@ const LogoutButton = () => {
   return (
     <Button
       variant="secondary"
-      onClick={() => {
-        logout();
+      onClick={async () => {
+        await logout();
         router.push('/');
       }}
     >
