@@ -86,4 +86,9 @@ export async function PUT(req: NextRequest) {
       variant: TemplateVariant.emailUpdate,
     }),
   });
+
+  return NextResponse.json(
+    { message: 'Password updated successful' },
+    { status: 200 }
+  );
 }
