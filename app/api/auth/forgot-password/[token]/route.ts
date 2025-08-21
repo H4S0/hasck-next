@@ -18,7 +18,6 @@ export async function PUT(
   await connectMongo();
 
   const token = await params.token;
-  console.log(token);
 
   if (!token) {
     return NextResponse.json({ error: 'Missing token' }, { status: 400 });

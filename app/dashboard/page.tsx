@@ -2,6 +2,7 @@ import { getHasckServerSession } from '../services/getHasckServerSession';
 import { redirect } from 'next/navigation';
 import { Navbar } from '@/components/navbar';
 import UpdateEmailForm from '@/components/forms/update-email-form';
+import PasswordResetForm from '@/components/forms/password-reset';
 
 const DashboardIndex = async () => {
   const { isAuthenticated } = await getHasckServerSession();
@@ -16,6 +17,7 @@ const DashboardIndex = async () => {
       <main className="flex-grow px-4 sm:px-6 lg:px-8 py-8 flex flex-col items-center">
         <div className="w-full max-w-4xl space-y-6 mt-20">
           <UpdateEmailForm />
+          <PasswordResetForm />
         </div>
       </main>
     </div>
