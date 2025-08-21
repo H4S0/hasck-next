@@ -36,6 +36,7 @@ export const getHasckServerSession = async (): Promise<SessionResult> => {
     }
     return { user, isAuthenticated: true };
   } catch (err) {
+    console.log(err);
     return {
       user: null,
       isAuthenticated: false,

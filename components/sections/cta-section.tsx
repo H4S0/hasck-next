@@ -13,7 +13,7 @@ export const CtaSection = () => {
           Ready to Transform Your Authentication?
         </h2>
         <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto mb-8">
-          Join thousands of developers who've streamlined their auth workflow
+          Join thousands of developers who have streamlined their auth workflow
           with Hasck
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
