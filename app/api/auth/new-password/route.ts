@@ -83,7 +83,7 @@ export async function PUT(req: NextRequest) {
     subject: 'Your password was updated successfully',
     react: EmailTemplate({
       firstName: updated.value.username,
-      variant: TemplateVariant.emailUpdate,
+      variant: TemplateVariant.passwordUpdate,
     }),
   });
 

@@ -6,6 +6,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import z from 'zod';
 import crypto from 'crypto';
 import { hash } from 'bcrypt-ts';
+import {
+  EmailTemplate,
+  TemplateVariant,
+} from '@/components/template/EmailTemplate';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const resetPasswordSchema = z.object({
   password: z.string().min(6),
@@ -68,6 +75,16 @@ export async function PUT(
   if (updated.isErr()) {
     return NextResponse.json({ error: updated.error }, { status: 500 });
   }
+
+  await resend.emails.send({
+    from: 'Acme <hasck-next@resend.dev>',
+    to: [`${updated.value.email}`],
+    subject: 'Your password was updated successfully',
+    react: EmailTemplate({
+      firstName: updated.value.username,
+      variant: TemplateVariant.passwordUpdate,
+    }),
+  });
 
   return NextResponse.json(
     { message: 'Password reset successful' },

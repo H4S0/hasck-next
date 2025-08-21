@@ -4,6 +4,7 @@ export enum TemplateVariant {
   registration = 'registration',
   emailUpdate = 'emailUpdate',
   passwordReset = 'passwordReset',
+  passwordUpdate = 'passwordUpdate',
 }
 
 interface EmailTemplateProps {
@@ -47,6 +48,13 @@ export function EmailTemplate({
             <a href={`http://localhost:3000/password-reset/${hashedToken}`}>
               Confirm Now
             </a>
+          </>
+        );
+      case TemplateVariant.passwordUpdate:
+        return (
+          <>
+            <h1>Hey {firstName},</h1>
+            <p>🔑 Your password was updated successfully</p>
           </>
         );
 
