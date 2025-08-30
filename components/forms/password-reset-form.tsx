@@ -24,6 +24,7 @@ import { Input } from '../ui/input';
 import { toast } from 'sonner';
 import { usePasswordReset } from '@/app/hook/usePasswordReset';
 import { ParamValue } from 'next/dist/server/request/params';
+import { getApiErrorMessage } from '@/app/utils/api-client';
 
 export const passwordSchema = z
   .object({
@@ -47,7 +48,7 @@ const PasswordResetForm = ({ token }: { token: ParamValue }) => {
         toast.success(response.message);
       },
       onError: (error) => {
-        toast.error(error.message);
+        toast.error(getApiErrorMessage(error));
       },
     });
   };

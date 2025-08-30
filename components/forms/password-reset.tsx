@@ -23,6 +23,7 @@ import {
 import { Input } from '../ui/input';
 import { toast } from 'sonner';
 import { useNewPassword } from '@/app/hook/useNewPassword';
+import { getApiErrorMessage } from '@/app/utils/api-client';
 
 export const passwordSchema = z.object({
   oldPassword: z.string(),
@@ -41,7 +42,7 @@ const PasswordResetForm = () => {
         toast.success(response.message);
       },
       onError: (error) => {
-        toast.error(error.message);
+        toast.error(getApiErrorMessage(error));
       },
     });
   };
