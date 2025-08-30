@@ -18,12 +18,9 @@ export const useRegister = () => {
         password: hashedPassword,
       };
 
-      const response = await axios.post<RegisterResponse>(
-        '/api/auth/register',
-        newData,
-        { withCredentials: true }
-      );
-
+      const response = await axios.post('/api/auth/register', newData, {
+        withCredentials: true,
+      });
       return response.data;
     },
   });

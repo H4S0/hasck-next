@@ -27,6 +27,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Separator } from '../ui/separator';
+import { getApiErrorMessage } from '@/app/utils/api-client';
 
 export const LoginSchema = z.object({
   username: z.string(),
@@ -47,7 +48,7 @@ const LoginForm = () => {
         router.push('/dashboard');
       },
       onError: (error) => {
-        toast.error(error.message);
+        toast.error(getApiErrorMessage(error));
       },
     });
   };

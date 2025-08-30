@@ -27,6 +27,7 @@ import {
 } from '../ui/card';
 import { Separator } from '../ui/separator';
 import Link from 'next/link';
+import { getApiErrorMessage } from '@/app/utils/api-client';
 
 export const RegisterSchema = z
   .object({
@@ -53,7 +54,7 @@ const RegisterForm = () => {
         redirect('/login');
       },
       onError: (error) => {
-        toast.error(error.message);
+        toast.error(getApiErrorMessage(error));
       },
     });
   };

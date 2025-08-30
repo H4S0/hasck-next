@@ -17,6 +17,7 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { toast } from 'sonner';
 import { useEmailUpdate } from '@/app/hook/useUpdateEmail';
+import { getApiErrorMessage } from '@/app/utils/api-client';
 
 export const EmailUpdateSchema = z.object({
   oldEmail: z.string().email(),
@@ -35,7 +36,7 @@ const UpdateEmailForm = () => {
         toast.success(response.message);
       },
       onError: (error) => {
-        toast.error(error.message);
+        toast.error(getApiErrorMessage(error));
       },
     });
   };
