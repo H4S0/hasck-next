@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import axios from 'axios';
 
 export type ApiErrorShape =
@@ -19,3 +20,26 @@ export function getApiErrorMessage(err: unknown): string {
   if (err instanceof Error) return err.message;
   return String(err);
 }
+=======
+import axios from 'axios';
+
+export type ApiErrorShape =
+  | { error: string }
+  | { error: { message: string; code?: string; details?: unknown } };
+
+export const api = axios.create({
+  baseURL: '/api',
+  withCredentials: true,
+});
+
+export function getApiErrorMessage(err: unknown): string {
+  if (axios.isAxiosError<ApiErrorShape>(err)) {
+    const payload = err.response?.data;
+    if (!payload) return err.message;
+    if (typeof payload.error === 'string') return payload.error;
+    return payload.error.message ?? err.message;
+  }
+  if (err instanceof Error) return err.message;
+  return String(err);
+}
+>>>>>>> a7ec74200a0eb0c022bb025e836eb1ce245e4304
