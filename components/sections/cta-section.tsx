@@ -22,7 +22,7 @@ export const CtaSection = () => {
             size="lg"
             className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg"
           >
-            <Link href="/signup">Start Building Now →</Link>
+            <Link href="/pages/signup">Start Building Now →</Link>
           </Button>
         </div>
       </div>

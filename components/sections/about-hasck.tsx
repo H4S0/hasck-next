@@ -1,4 +1,4 @@
-import { FeatureCard } from '../feature-card';
+import { FeatureCard } from '../additional/feature-card';
 
 export const AboutHasck = () => {
   return (

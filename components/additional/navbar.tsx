@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { Button } from './ui/button';
-import LogoutButton from '@/app/logout';
-import { Separator } from './ui/separator';
+
+import LogoutButton from './logout-button';
+import { Button } from '../ui/button';
+import { Separator } from '../ui/separator';
 
 export const Navbar = ({ isAuthenticated }: { isAuthenticated?: boolean }) => {
   return (
@@ -21,14 +22,14 @@ export const Navbar = ({ isAuthenticated }: { isAuthenticated?: boolean }) => {
                 size="sm"
                 className="text-sm md:text-base"
               >
-                <Link href="/login">Sign In</Link>
+                <Link href="/pages/login">Sign In</Link>
               </Button>
               <Button
                 asChild
                 size="sm"
                 className="text-sm md:text-base bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
               >
-                <Link href="/signup">Get Started</Link>
+                <Link href="/pages/signup">Get Started</Link>
               </Button>
             </>
           )}

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '../ui/button';
-import { CodeExamples } from '../code-example';
+import { CodeExamples } from '../additional/code-example';
 
 export const HeroSection = () => {
   return (
@@ -34,7 +34,7 @@ export const HeroSection = () => {
             variant="outline"
             className="text-sm md:text-base border-2 hover:bg-background/50 backdrop-blur-sm"
           >
-            <Link href="/login">Explore Features</Link>
+            <Link href="/pages/login">Explore Features</Link>
           </Button>
         </div>
 

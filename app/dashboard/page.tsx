@@ -1,8 +1,8 @@
 import { getHasckServerSession } from '../services/getHasckServerSession';
 import { redirect } from 'next/navigation';
-import { Navbar } from '@/components/navbar';
 import UpdateEmailForm from '@/components/forms/update-email-form';
 import PasswordResetForm from '@/components/forms/password-reset';
+import { Navbar } from '@/components/additional/navbar';
 
 const DashboardIndex = async () => {
   const { isAuthenticated } = await getHasckServerSession();

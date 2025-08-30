@@ -22,8 +22,8 @@ import {
   FormControl,
   FormMessage,
 } from '../ui/form';
-import { Input } from '../ui/input';
 import { toast } from 'sonner';
+import { Input } from '../ui/input';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Separator } from '../ui/separator';
@@ -100,12 +100,12 @@ const LoginForm = () => {
 
       <CardFooter className="flex flex-col items-center gap-5">
         <CardDescription>Dont have account?</CardDescription>
-        <Link href={'/signup'} className="w-full">
+        <Link href={'/pages/signup'} className="w-full">
           <Button className="w-full" variant="secondary">
             Make one
           </Button>
         </Link>
-        <Link href={'/init-forgot-password'} className="w-full">
+        <Link href={'/pages/init-forgot-password'} className="w-full">
           <Button className="w-full" variant="outline">
             Forgot password
           </Button>
