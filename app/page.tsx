@@ -1,9 +1,9 @@
-import { Navbar } from '@/components/navbar';
 import { AboutHasck } from '@/components/sections/about-hasck';
 import { CtaSection } from '@/components/sections/cta-section';
 import { Footer } from '@/components/sections/footer';
 import { HeroSection } from '@/components/sections/hero-section';
 import { getHasckServerSession } from './services/getHasckServerSession';
+import { Navbar } from '@/components/additional/navbar';
 
 export default async function Page() {
   const { isAuthenticated } = await getHasckServerSession();
